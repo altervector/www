@@ -6,9 +6,10 @@
     <title>AlterVector | Solucions Digitals Dinàmiques</title>
     <style>
         :root {
-            --primary: #0070f3; 
-            --dark: #000000;
-            --grey: #666;
+            /* Hem capturat els colors del teu logo per a la web */
+            --primary: #129dfc; /* Blau brillant del degradat del logo */
+            --dark: #0f4a86; /* Blau fosc per a textos de contrast */
+            --grey: #555555;
             --bg: #ffffff;
         }
         
@@ -35,7 +36,7 @@
             margin-bottom: 30px;
         }
         .logo-img {
-            max-width: 200px;
+            max-width: 250px; /* Ajustat perquè es vegi bé el text del logo */
             height: auto;
         }
 
@@ -55,18 +56,19 @@
             text-decoration: none;
             display: block;
             color: inherit;
-            transition: border-color 0.2s ease;
+            transition: all 0.2s ease;
             text-align: left;
         }
         .project-card:hover {
-            border-color: var(--dark);
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(18, 157, 252, 0.1); /* Una ombra molt suau del color corporatiu al fer hover */
         }
         .badge {
             font-size: 10px;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: var(--primary);
+            color: var(--primary); /* Blau del logo */
             display: block;
             margin-bottom: 8px;
         }
@@ -74,6 +76,7 @@
             font-size: 1.2rem;
             font-weight: 600;
             margin: 0 0 5px 0;
+            color: var(--dark); /* Blau fosc del logo per al títol */
         }
         .project-desc {
             font-size: 0.9rem;
@@ -92,7 +95,7 @@
             color: var(--dark);
             text-decoration: none;
             font-weight: 600;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid transparent;
         }
         .contact-footer a:hover {
             border-bottom-color: var(--dark);
@@ -103,7 +106,7 @@
 
     <div class="container">
         <div class="logo-box">
-            <img src="logoAV.png" alt="AlterVector" class="logo-img">
+            <img src="logoAVtrans.png" alt="AlterVector" class="logo-img">
         </div>
         
         <h1>Digitalització de negocis mitjançant catàlegs dinàmics i alta velocitat de càrrega.</h1>
