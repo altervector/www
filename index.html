@@ -20,12 +20,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
    
     <style>
+        @font-face {
+    font-family: 'Comfortaa';
+    src: url('https://avsets.pages.dev/fonts/Comfortaa-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+    }
         :root {
             /* Hem capturat els colors del teu logo per a la web */
             --primary: #129dfc; /* Blau brillant del degradat del logo */
             --dark: #0f4a86; /* Blau fosc per a textos de contrast */
             --grey: #555555;
             --bg: #ffffff;
+            --font-titol:'Comfortaa';
         }
         
         body {
@@ -158,7 +165,7 @@
               <div class="blocnoutext">
 
             <span class="badge">Projecte destacat</span>
-            <p class="project-title">Àgora Restaurant</p>
+            <p class="project-title" font-family: var(--font-titol);>Àgora Restaurant</p>
             <p class="project-desc">Sistema de carta digital dinàmica optimitzada per a dispositius mòbils.</p>
 
               </div>
