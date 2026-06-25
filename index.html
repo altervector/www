@@ -248,14 +248,15 @@
         .portfolio-card-imatge {
             width: 100%;
             height: 180px;
+            background: #c4c4c4;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
-            color: white;
-            font-weight: 800;
-            letter-spacing: 3px;
-            /*text-transform: uppercase;*/
+        }
+
+        .portfolio-card-imatge img {
+            height: 100px;
+            width: auto;
         }
 
         .portfolio-card-text { padding: 20px 22px; }
@@ -555,8 +556,8 @@
             <div class="portfolio-grid">
 
                 <div class="portfolio-card" onclick="obrirModal('agora')">
-                    <div class="portfolio-card-imatge" style="background: linear-gradient(135deg, #1d0047, #2c3e35);">
-                        <h2 class="font-agora">àgora</h2>
+                    <div class="portfolio-card-imatge">
+                        <img src="https://avsets.pages.dev/logo/logoAGtrans.png" alt="Àgora">
                     </div>
                     <div class="portfolio-card-text">
                         <h3 class="font-agora">àgora Restaurant</h3>
@@ -566,8 +567,8 @@
                 </div>
 
                 <div class="portfolio-card" onclick="obrirModal('oleyaji')">
-                    <div class="portfolio-card-imatge" style="background: linear-gradient(135deg, #7b1a1a, #c8973a);">
-                        OLÉ Y AJÍ
+                    <div class="portfolio-card-imatge">
+                        <img src="https://avsets.pages.dev/logo/logoOAtrans.png" alt="Olé y Ají">
                     </div>
                     <div class="portfolio-card-text">
                         <h3>Olé y Ají Gastronomia</h3>
@@ -576,14 +577,14 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card" onclick="obrirModal('oleyaji')">
-                    <div class="portfolio-card-imatge" style="background: linear-gradient(135deg, #7b1a1a, #c8973a);">
-                        OLÉ Y AJÍ
+                <div class="portfolio-card" onclick="obrirModal('adrimotors')">
+                    <div class="portfolio-card-imatge">
+                        <img src="https://avsets.pages.dev/logo/logoAMtrans.png" alt="adrimotors">
                     </div>
                     <div class="portfolio-card-text">
-                        <h3>Olé y Ají Gastronomia</h3>
-                        <p>Web de restaurant amb galeria de plats, fotos i descripcions. Gestió de contingut amb imatges.</p>
-                        <span class="portfolio-card-tag">Restauració</span>
+                        <h3>Adri Mototrs</h3>
+                        <p>Web estàtica per especialistes en manteniment, reparació i restauració de motocicletes.</p>
+                        <span class="portfolio-card-tag">Mecanic motos</span>
                     </div>
                 </div>
 
@@ -660,6 +661,21 @@
                     "https://avsets.pages.dev/images/oleyaji-captures/s7.png",
                 ],
                 link:     "https://oleyaji.altervector.com",
+                linkText: "Visitar la web"
+            },
+
+           adrimotors: {
+                titol:    "Adri Motors",
+                subtitol: "Mecanica de motos",
+                desc:     "Web estàtica per especialistes en manteniment, reparació i restauració de motocicletes.",
+                captures: [
+                    "https://avsets.pages.dev/images/adrimotors-captures/s1.png",
+                    "https://avsets.pages.dev/images/adrimotors-captures/s2.png",
+                    "https://avsets.pages.dev/images/adrimotors-captures/s3.png",
+                    "https://avsets.pages.dev/images/adrimotors-captures/s4.png",
+                    
+                ],
+                link:     "https://adrimotors.altervector.com",
                 linkText: "Visitar la web"
             }
 
