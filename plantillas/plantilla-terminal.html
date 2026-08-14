@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TERMINAL — Plantilla ganxo AlterVector</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+/* ============================================================
+   1. VARIABLES — blanc + negre + taronja senyal, tot monoespai
+   ============================================================ */
+:root{
+    --bg:        #FDFDFB;
+    --surface:   #F4F3EE;
+    --ink:       #101010;
+    --ink-soft:  #6B6B66;
+    --senyal:    #FF4D00;
+    --line:      #DEDCD3;
+
+    --font: 'JetBrains Mono', monospace;
+    --radi: 10px;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font);
+    line-height: 1.6;
+}
+img{ max-width:100%; display:block; }
+a{ color:inherit; text-decoration:none; }
+
+.eyebrow{
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--senyal);
+    margin-bottom: 16px;
+}
+.eyebrow::before{ content:"// "; color: var(--ink-soft); }
+
+/* ============================================================
+   2. TOPBAR — barra tipus editor de codi, amb rellotge real
+   ============================================================ */
+.topbar{
+    position: sticky; top:0; z-index: 200;
+    display: flex; align-items:center; justify-content:space-between;
+    padding: 14px 20px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+}
+.topbar-esq{ display:flex; align-items:center; gap:10px; font-size:13px; }
+.punts-fals{ display:flex; gap:6px; }
+.punts-fals span{ width:9px; height:9px; border-radius:50%; background: var(--line); }
+.punts-fals span:nth-child(1){ background:#FF5F57; }
+.punts-fals span:nth-child(2){ background:#FEBC2E; }
+.punts-fals span:nth-child(3){ background:#28C840; }
+.ruta{ color: var(--ink-soft); }
+.ruta b{ color: var(--ink); }
+
+.btn-menu{
+    display:none;
+    background:none; border:1px solid var(--ink); border-radius:6px;
+    font-family: var(--font); font-size:12px; padding:8px 12px; cursor:pointer;
+}
+
+.nav-desktop{ display:none; gap: 4px; align-items:center; }
+.nav-desktop a{
+    font-size: 12px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    color: var(--ink-soft);
+}
+.nav-desktop a:hover{ background: var(--surface); color: var(--ink); }
+.rellotge{ font-size:12px; color: var(--ink-soft); }
+
+@media (min-width: 860px){
+    .nav-desktop{ display:flex; }
+}
+@media (max-width: 859px){
+    .topbar-esq .ruta{ display:none; }
+}
+
+.menu-mobil{
+    position: fixed; inset:0; top:53px; background: var(--bg);
+    z-index:190; padding:24px 20px;
+    transform: translateY(-10px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.menu-mobil.obert{ opacity:1; transform:translateY(0); pointer-events:auto; }
+.menu-mobil ul{ list-style:none; display:flex; flex-direction:column; gap:2px; }
+.menu-mobil a{
+    display:block; padding: 16px 4px; border-bottom: 1px solid var(--line);
+    font-size: 15px;
+}
+.menu-mobil a::before{ content:"> "; color: var(--senyal); }
+
+@media (min-width: 860px){ .btn-menu{ display:none !important; } }
+@media (max-width: 859px){ .btn-menu{ display:inline-block; } }
+
+/* ============================================================
+   3. HERO — titular amb efecte de mecanografia
+   ============================================================ */
+.hero{
+    padding: 90px 20px 70px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+.hero .prompt{ color: var(--ink-soft); font-size: 13px; margin-bottom: 18px; }
+.hero .prompt::before{ content:"$ "; color: var(--senyal); }
+
+.hero h1{
+    font-size: clamp(1.9rem, 7vw, 3.6rem);
+    font-weight: 800;
+    line-height: 1.25;
+    letter-spacing: -0.5px;
+    min-height: 4.2em;
+}
+.cursor-fals{
+    display:inline-block;
+    width: 0.5em; height: 1em;
+    background: var(--senyal);
+    vertical-align: middle;
+    animation: parpelleja 1s step-end infinite;
+}
+@keyframes parpelleja{ 50%{ opacity:0; } }
+
+.hero p{ color: var(--ink-soft); margin: 26px 0 34px; max-width: 520px; font-size: 15px; }
+
+.hero-accions{ display:flex; flex-wrap:wrap; gap:14px; }
+
+.boto-principal{
+    background: var(--ink); color: var(--bg);
+    font-size:13px; padding: 15px 26px; border-radius: var(--radi);
+    display:inline-block; transition: background 0.2s ease;
+}
+.boto-principal:hover{ background: var(--senyal); }
+.boto-principal::before{ content:"$ "; opacity:0.5; }
+
+.link-secundari{
+    font-size:13px; border: 1px solid var(--line); padding: 14px 24px; border-radius: var(--radi);
+}
+.link-secundari:hover{ border-color: var(--ink); }
+
+/* ============================================================
+   4. TICKER — franja de capacitats, estil status bar
+   ============================================================ */
+.ticker{
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: var(--surface);
+    padding: 14px 0;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.ticker-track{ display:inline-flex; animation: desplaca 24s linear infinite; }
+.ticker span{ font-size:12px; padding: 0 22px; color: var(--ink-soft); }
+.ticker span::before{ content:"[ok] "; color: #28C840; }
+@keyframes desplaca{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+/* ============================================================
+   5. LLISTA DE SERVEIS — estil explorador d'arxius
+   ============================================================ */
+.seccio{ padding: 80px 20px; max-width: 900px; margin: 0 auto; }
+.seccio-titol{ font-size: clamp(1.4rem, 4vw, 2rem); font-weight:800; margin-bottom: 30px; }
+
+.llista-arxius{ border: 1px solid var(--line); border-radius: var(--radi); overflow:hidden; }
+.fila{
+    display: flex; align-items:center; gap: 14px;
+    padding: 18px 18px;
+    border-bottom: 1px solid var(--line);
+    transition: background 0.15s ease;
+}
+.fila:last-child{ border-bottom:none; }
+.fila:hover{ background: var(--surface); }
+.fila .icona{ color: var(--senyal); font-size: 14px; }
+.fila .nom{ font-weight: 700; font-size: 13px; flex: 1; }
+.fila .desc{ color: var(--ink-soft); font-size: 12px; }
+.fila .ext{ color: var(--ink-soft); font-size:11px; }
+
+@media (min-width: 720px){
+    .fila{ display:grid; grid-template-columns: 20px 160px 1fr 60px; align-items:center; }
+}
+
+/* ============================================================
+   6. MANIFEST
+   ============================================================ */
+.manifest{ display:grid; grid-template-columns:1fr; gap:26px; }
+.manifest p.gran{ font-size: clamp(1.2rem, 3.4vw, 1.6rem); line-height:1.5; }
+.manifest p.gran span{ color: var(--senyal); font-weight:700; }
+.stats{ display:flex; gap:34px; margin-top:20px; }
+.stat-num{ font-size:1.7rem; font-weight:800; }
+.stat-label{ font-size:10px; color: var(--ink-soft); text-transform:uppercase; }
+@media (min-width: 1024px){ .manifest{ grid-template-columns: 1.1fr 0.9fr; align-items:start; } }
+
+/* ============================================================
+   7. CTA — estil prompt de terminal
+   ============================================================ */
+.cta-bloc{
+    background: var(--ink);
+    color: var(--bg);
+    border-radius: var(--radi);
+    margin: 0 20px 90px;
+    padding: 50px 30px;
+    max-width: 860px;
+    margin-left: auto; margin-right: auto;
+}
+.cta-bloc .linia{ font-size: 13px; margin-bottom: 8px; color: #9d9d97; }
+.cta-bloc .linia b{ color: #28C840; }
+.cta-bloc h2{ font-size: clamp(1.4rem, 4vw, 2rem); margin: 14px 0 26px; }
+.cta-bloc .boto-principal{ background: var(--senyal); }
+.cta-bloc .boto-principal:hover{ background: var(--bg); color: var(--ink); }
+
+/* ============================================================
+   8. FOOTER
+   ============================================================ */
+footer{ border-top: 1px solid var(--line); padding: 40px 20px 30px; }
+.footer-grid{ max-width: 900px; margin:0 auto; display:flex; flex-wrap:wrap; justify-content:space-between; gap:20px; font-size:12px; color: var(--ink-soft); }
+.footer-grid a:hover{ color: var(--senyal); }
+
+@media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+    <div class="topbar-esq">
+        <div class="punts-fals"><span></span><span></span><span></span></div>
+        <span class="ruta">~/<b>terminal</b>/inicio.html</span>
+    </div>
+    <nav class="nav-desktop">
+        <a href="#inici">inicio</a>
+        <a href="#servicios">servicios</a>
+        <a href="#estudio">estudio</a>
+        <a href="#contacto">contacto</a>
+    </nav>
+    <div style="display:flex; align-items:center; gap:14px;">
+        <span class="rellotge" id="rellotge">00:00:00</span>
+        <button class="btn-menu" id="btnMenu">menu</button>
+    </div>
+</div>
+
+<div class="menu-mobil" id="menuMobil">
+    <ul>
+        <li><a href="#inici">inicio</a></li>
+        <li><a href="#servicios">servicios</a></li>
+        <li><a href="#estudio">estudio</a></li>
+        <li><a href="#contacto">contacto</a></li>
+    </ul>
+</div>
+
+<section class="hero" id="inici">
+    <p class="prompt">whoami</p>
+    <h1 id="titolEscrit"><span class="cursor-fals"></span></h1>
+    <p>Webs a medida para negocios que no quieren pasar desapercibidos. Sin plantillas genéricas, sin relleno de más.</p>
+    <div class="hero-accions">
+        <a href="#contacto" class="boto-principal">empezar --proyecto</a>
+        <a href="#servicios" class="link-secundari">ver servicios</a>
+    </div>
+</section>
+
+<div class="ticker">
+    <div class="ticker-track">
+        <span>diseño web</span><span>identidad</span><span>ux / ui</span><span>desarrollo</span><span>mantenimiento</span>
+        <span>diseño web</span><span>identidad</span><span>ux / ui</span><span>desarrollo</span><span>mantenimiento</span>
+    </div>
+</div>
+
+<section class="seccio" id="servicios">
+    <p class="eyebrow">servicios/</p>
+    <h2 class="seccio-titol">Lo que hacemos, sin rodeos.</h2>
+    <div class="llista-arxius">
+        <div class="fila"><span class="icona">▸</span><span class="nom">diseño-web</span><span class="desc">A medida, desde cero, para tu negocio.</span><span class="ext">.web</span></div>
+        <div class="fila"><span class="icona">▸</span><span class="nom">identidad</span><span class="desc">Logotipo y paleta coherentes en todo.</span><span class="ext">.brand</span></div>
+        <div class="fila"><span class="icona">▸</span><span class="nom">desarrollo</span><span class="desc">Código ligero, rápido, sin relleno.</span><span class="ext">.dev</span></div>
+        <div class="fila"><span class="icona">▸</span><span class="nom">mantenimiento</span><span class="desc">Soporte continuo una vez está viva.</span><span class="ext">.sup</span></div>
+    </div>
+</section>
+
+<section class="seccio" id="estudio">
+    <div class="manifest">
+        <p class="gran">No creemos en plantillas genéricas. <span>Cada proyecto empieza de cero</span>, pensado para la marca que lo necesita.</p>
+        <div>
+            <p style="color:var(--ink-soft); font-size:14px;">Trabajamos con negocios locales que quieren una web que se note — sin depender de constructores genéricos.</p>
+            <div class="stats">
+                <div><div class="stat-num">100%</div><div class="stat-label">a medida</div></div>
+                <div><div class="stat-num">24h</div><div class="stat-label">respuesta</div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="cta-bloc" id="contacto">
+    <p class="linia">$ contacto --enviar <b>[listo]</b></p>
+    <h2>¿Hablamos de tu proyecto?</h2>
+    <a href="mailto:info@altervector.com" class="boto-principal">escribenos --ahora</a>
+</section>
+
+<footer>
+    <div class="footer-grid">
+        <span>terminal — plantilla ganxo 2027</span>
+        <span>powered by <a href="https://www.altervector.com" target="_blank">altervector.com</a></span>
+    </div>
+</footer>
+
+<script>
+/* ============================================================
+   BLOC 1 — MENÚ MÒBIL
+   ============================================================ */
+const btnMenu = document.getElementById('btnMenu');
+const menuMobil = document.getElementById('menuMobil');
+btnMenu.addEventListener('click', () => menuMobil.classList.toggle('obert'));
+menuMobil.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menuMobil.classList.remove('obert')));
+
+/* ============================================================
+   BLOC 2 — RELLOTGE EN DIRECTE
+   Actualitza l'hora real cada segon a la barra superior
+   ============================================================ */
+const rellotge = document.getElementById('rellotge');
+const actualitzarRellotge = () => {
+    const ara = new Date();
+    const hh = String(ara.getHours()).padStart(2, '0');
+    const mm = String(ara.getMinutes()).padStart(2, '0');
+    const ss = String(ara.getSeconds()).padStart(2, '0');
+    rellotge.textContent = `${hh}:${mm}:${ss}`;
+};
+actualitzarRellotge();
+setInterval(actualitzarRellotge, 1000);
+
+/* ============================================================
+   BLOC 3 — EFECTE DE MECANOGRAFIA AL TITULAR
+   Escriu el text lletra a lletra, com si algú l'estigués
+   teclejant en directe. Respecta prefers-reduced-motion.
+   ============================================================ */
+const titolEscrit = document.getElementById('titolEscrit');
+const textFinal = 'Diseño que se explica solo.';
+const menysMoviment = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const cursorHTML = '<span class="cursor-fals"></span>';
+
+if (menysMoviment) {
+    titolEscrit.innerHTML = textFinal + cursorHTML;
+} else {
+    let i = 0;
+    const escriure = () => {
+        titolEscrit.innerHTML = textFinal.slice(0, i) + cursorHTML;
+        i++;
+        if (i <= textFinal.length) setTimeout(escriure, 45);
+    };
+    escriure();
+}
+</script>
+
+</body>
+</html>

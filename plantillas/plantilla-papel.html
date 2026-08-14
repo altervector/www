@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PAPEL — Plantilla ganxo AlterVector</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Caveat:wght@600&family=Karla:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* ============================================================
+   1. VARIABLES — paper càlid, artesanal
+   ============================================================ */
+:root{
+    --bg:        #E9E4D0;   /* paper verd-beix, no el crema típic */
+    --surface:   #F5F2E6;
+    --ink:       #2B241C;
+    --ink-soft:  #6B6351;
+    --accent:    #3F5C3E;   /* verd bosc */
+    --accent-2:  #C98A2C;   /* mostassa */
+    --line:      #D3CBB2;
+
+    --font-display: 'Instrument Serif', serif;
+    --font-ma:      'Caveat', cursive;
+    --font-cos:     'Karla', sans-serif;
+    --font-mono:    'Space Mono', monospace;
+
+    --radi: 18px;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-cos);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+img{ max-width:100%; display:block; }
+a{ color:inherit; text-decoration:none; }
+
+.eyebrow{
+    font-family: var(--font-ma);
+    font-size: 22px;
+    color: var(--accent);
+    margin-bottom: 6px;
+}
+
+/* ============================================================
+   2. CALAIX DE NAVEGACIÓ — pestanya al cantó que s'obre
+   ============================================================ */
+.pestanya{
+    position: fixed;
+    top: 24px; left: 0;
+    z-index: 300;
+    background: var(--ink);
+    color: var(--bg);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 12px 16px 12px 20px;
+    border-radius: 0 999px 999px 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.pestanya .icona{ font-family: var(--font-ma); font-size: 18px; }
+
+.calaix{
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    width: min(300px, 80vw);
+    background: var(--surface);
+    border-right: 2px solid var(--ink);
+    z-index: 310;
+    padding: 100px 30px 30px;
+    transform: translateX(-100%);
+    transition: transform 0.4s cubic-bezier(.6,0,.2,1);
+}
+.calaix.obert{ transform: translateX(0); }
+
+.calaix .logo{ font-family: var(--font-display); font-style: italic; font-size: 28px; margin-bottom: 40px; }
+.calaix ul{ list-style:none; }
+.calaix li{ margin-bottom: 22px; }
+.calaix a{ font-family: var(--font-display); font-size: 1.6rem; }
+.calaix a:hover{ color: var(--accent); }
+.calaix .tancar{
+    position: absolute; top: 24px; right: 24px;
+    font-family: var(--font-mono); font-size: 12px;
+    cursor: pointer; background:none; border:none;
+}
+
+.fons-calaix{
+    position: fixed; inset:0; z-index: 305;
+    background: rgba(43,36,28,0.3);
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+.fons-calaix.obert{ opacity: 1; pointer-events: auto; }
+
+/* ============================================================
+   3. HERO — blob orgànic + subratllat a mà
+   ============================================================ */
+.hero{
+    position: relative;
+    padding: 130px 24px 70px;
+    overflow: hidden;
+}
+.blob{
+    position: absolute;
+    top: -60px; right: -80px;
+    width: 380px; height: 380px;
+    background: var(--accent-2);
+    opacity: 0.35;
+    border-radius: 42% 58% 65% 35% / 45% 45% 55% 55%;
+    z-index: 0;
+}
+
+.hero-contingut{ position:relative; z-index:1; max-width: 720px; }
+
+.hero h1{
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(2.6rem, 9vw, 4.8rem);
+    line-height: 1.05;
+    margin-bottom: 26px;
+}
+.subratllat{ position: relative; white-space: nowrap; }
+.subratllat svg{ position:absolute; left:-2%; bottom:-10px; width:104%; height:14px; }
+
+.hero p{ color: var(--ink-soft); max-width: 460px; margin-bottom: 34px; font-size: 1.05rem; }
+
+.hero-accions{ display:flex; flex-wrap:wrap; gap:18px; align-items:center; }
+
+.boto-principal{
+    background: var(--ink);
+    color: var(--bg);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 15px 28px;
+    border-radius: 999px;
+    display: inline-block;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+.boto-principal:hover{ background: var(--accent); transform: rotate(-2deg); }
+
+.link-secundari{ font-family: var(--font-ma); font-size: 22px; color: var(--accent); }
+
+/* ============================================================
+   4. FRANJA DE PARAULES
+   ============================================================ */
+.marquee{
+    border-top: 2px solid var(--ink);
+    border-bottom: 2px solid var(--ink);
+    padding: 18px 0;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.marquee-track{ display:inline-flex; animation: desplaca 24s linear infinite; }
+.marquee span{
+    font-family: var(--font-mono);
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 0 26px;
+}
+.marquee span::after{ content:"✦"; margin-left:26px; color: var(--accent-2); }
+@keyframes desplaca{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+/* ============================================================
+   5. SERVEIS — fitxes com a post-its, lleugerament girades
+   ============================================================ */
+.seccio{ padding: 90px 24px; max-width: 1180px; margin:0 auto; }
+
+.seccio-titol{
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(1.9rem, 5vw, 2.6rem);
+    max-width: 600px;
+    margin-bottom: 40px;
+}
+
+.grid-fitxes{ display:grid; grid-template-columns: 1fr; gap: 22px; }
+
+.fitxa{
+    background: var(--surface);
+    border: 2px solid var(--ink);
+    border-radius: var(--radi);
+    padding: 28px 24px;
+    transition: transform 0.2s ease;
+}
+.fitxa:nth-child(1){ transform: rotate(-1.5deg); }
+.fitxa:nth-child(2){ transform: rotate(1deg); }
+.fitxa:nth-child(3){ transform: rotate(-0.8deg); }
+.fitxa:nth-child(4){ transform: rotate(1.6deg); }
+.fitxa:hover{ transform: rotate(0deg) translateY(-4px); }
+
+.fitxa .num{ font-family: var(--font-ma); font-size: 26px; color: var(--accent-2); }
+.fitxa h3{ font-family: var(--font-display); font-size: 1.4rem; margin: 8px 0 10px; }
+.fitxa p{ color: var(--ink-soft); font-size: 0.92rem; }
+
+@media (min-width: 640px){ .grid-fitxes{ grid-template-columns: repeat(2,1fr); } }
+@media (min-width: 1024px){ .grid-fitxes{ grid-template-columns: repeat(4,1fr); } }
+
+/* ============================================================
+   6. MANIFEST
+   ============================================================ */
+.manifest{ display:grid; grid-template-columns:1fr; gap:30px; }
+.manifest blockquote{
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(1.5rem, 4.5vw, 2.2rem);
+    line-height: 1.3;
+}
+.manifest blockquote .ma{ font-family: var(--font-ma); color: var(--accent); font-size: 1.3em; }
+.stats{ display:flex; gap:36px; margin-top:24px; }
+.stat-num{ font-family: var(--font-display); font-style: italic; font-size: 2rem; color: var(--accent); }
+.stat-label{ font-family: var(--font-mono); font-size:10px; text-transform:uppercase; letter-spacing:1px; color: var(--ink-soft); }
+
+@media (min-width: 1024px){ .manifest{ grid-template-columns: 1.1fr 0.9fr; align-items:start; } }
+
+/* ============================================================
+   7. CTA — segell circular
+   ============================================================ */
+.cta-bloc{ text-align:center; padding: 60px 24px 110px; }
+.segell{
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    border: 2px dashed var(--ink);
+    margin-bottom: 20px;
+}
+.segell span:first-child{ font-family: var(--font-display); font-style:italic; font-size: 1.6rem; }
+.segell span:last-child{ font-family: var(--font-mono); font-size: 10px; letter-spacing:2px; text-transform:uppercase; margin-top:6px; color: var(--accent); }
+
+/* ============================================================
+   8. FOOTER
+   ============================================================ */
+footer{ background: var(--ink); color: rgba(233,228,208,0.75); padding: 60px 24px 34px; }
+.footer-grid{ max-width:1180px; margin:0 auto; display:grid; grid-template-columns:1fr; gap:30px; }
+.footer-marca .logo{ font-family: var(--font-display); font-style:italic; font-size: 26px; color: var(--bg); margin-bottom:10px; }
+footer h4{ font-family: var(--font-mono); font-size:10px; letter-spacing:2px; text-transform:uppercase; color: var(--accent-2); margin-bottom:14px; }
+footer ul{ list-style:none; display:flex; flex-direction:column; gap:8px; }
+footer a:hover{ color: var(--bg); }
+.footer-baix{
+    max-width:1180px; margin:40px auto 0; padding-top:20px;
+    border-top: 1px solid rgba(233,228,208,0.15);
+    font-family: var(--font-mono); font-size:10px; color: rgba(233,228,208,0.4);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+}
+.footer-baix a{ color: var(--accent-2); }
+
+@media (min-width: 640px){ .footer-grid{ grid-template-columns: 1.4fr 1fr 1fr; } }
+
+/* ============================================================
+   9. RASTRE DE TINTA (el genera JS)
+   ============================================================ */
+.gota{
+    position: fixed;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    pointer-events: none;
+    z-index: 400;
+    transform: translate(-50%,-50%);
+    animation: esvaeix 0.8s ease-out forwards;
+}
+@keyframes esvaeix{
+    from{ opacity: 0.7; transform: translate(-50%,-50%) scale(1); }
+    to{ opacity: 0; transform: translate(-50%,-50%) scale(0.3); }
+}
+
+@media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="pestanya" id="pestanya"><span class="icona">✎</span> Menú</div>
+
+<div class="fons-calaix" id="fonsCalaix"></div>
+<nav class="calaix" id="calaix">
+    <button class="tancar" id="tancarCalaix">✕ Tancar</button>
+    <div class="logo">Papel.</div>
+    <ul>
+        <li><a href="#inici">Inicio</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#estudio">Estudio</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+    </ul>
+</nav>
+
+<!-- ════════════════════════════════════════════════════════
+     HERO
+     ════════════════════════════════════════════════════════ -->
+<section class="hero" id="inici">
+    <div class="blob"></div>
+    <div class="hero-contingut">
+        <p class="eyebrow">Plantilla — Papel 2027</p>
+        <h1>Diseño con <span class="subratllat">calidez<svg viewBox="0 0 200 14" preserveAspectRatio="none"><path d="M2 10 Q 50 2, 100 8 T 198 6" stroke="#C98A2C" stroke-width="4" fill="none" stroke-linecap="round"/></svg></span> y carácter.</h1>
+        <p>Webs a medida para negocios que quieren sentirse cercanos, no fríos ni de plantilla.</p>
+        <div class="hero-accions">
+            <a href="#contacto" class="boto-principal">Empezar proyecto</a>
+            <a href="#servicios" class="link-secundari">ver servicios ↓</a>
+        </div>
+    </div>
+</section>
+
+<div class="marquee">
+    <div class="marquee-track">
+        <span>Diseño web</span><span>Identidad</span><span>UX / UI</span><span>Desarrollo</span><span>Mantenimiento</span>
+        <span>Diseño web</span><span>Identidad</span><span>UX / UI</span><span>Desarrollo</span><span>Mantenimiento</span>
+    </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     SERVEIS
+     ════════════════════════════════════════════════════════ -->
+<section class="seccio" id="servicios">
+    <h2 class="seccio-titol">Cuatro fichas, un solo objetivo: que tu web se sienta tuya.</h2>
+    <div class="grid-fitxes">
+        <div class="fitxa"><span class="num">01</span><h3>Diseño web</h3><p>A medida, desde cero, pensado para tu negocio.</p></div>
+        <div class="fitxa"><span class="num">02</span><h3>Identidad</h3><p>Logotipo y paleta coherentes en todos tus canales.</p></div>
+        <div class="fitxa"><span class="num">03</span><h3>Desarrollo</h3><p>Código ligero y rápido, sin plugins de más.</p></div>
+        <div class="fitxa"><span class="num">04</span><h3>Mantenimiento</h3><p>Soporte y actualizaciones una vez la web está viva.</p></div>
+    </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     MANIFEST
+     ════════════════════════════════════════════════════════ -->
+<section class="seccio" id="estudio">
+    <div class="manifest">
+        <blockquote>No creemos en plantillas genéricas. <span class="ma">Cada proyecto empieza de cero.</span></blockquote>
+        <div>
+            <p style="color:var(--ink-soft)">Trabajamos con negocios que quieren una web con alma, hecha a mano y pensada para ellos.</p>
+            <div class="stats">
+                <div><div class="stat-num">100%</div><div class="stat-label">A medida</div></div>
+                <div><div class="stat-num">24h</div><div class="stat-label">Respuesta</div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     CTA — segell
+     ════════════════════════════════════════════════════════ -->
+<section class="cta-bloc" id="contacto">
+    <div class="segell"><span>¿Hablamos?</span><span>Escríbenos</span></div><br>
+    <a href="mailto:info@altervector.com" class="boto-principal">info@altervector.com</a>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     FOOTER
+     ════════════════════════════════════════════════════════ -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-marca">
+            <div class="logo">Papel.</div>
+            <p style="font-size:0.9rem; max-width:280px;">Plantilla de demostración — pensada para adaptarse a cualquier negocio local.</p>
+        </div>
+        <div>
+            <h4>Navegación</h4>
+            <ul><li><a href="#inici">Inicio</a></li><li><a href="#servicios">Servicios</a></li><li><a href="#estudio">Estudio</a></li></ul>
+        </div>
+        <div>
+            <h4>Contacto</h4>
+            <ul><li><a href="mailto:info@altervector.com">info@altervector.com</a></li><li><a href="#">Instagram</a></li></ul>
+        </div>
+    </div>
+    <div class="footer-baix">
+        <span>Plantilla ganxo — 2027</span>
+        <span>Powered by <a href="https://www.altervector.com" target="_blank">AlterVector</a></span>
+    </div>
+</footer>
+
+<script>
+/* ============================================================
+   BLOC 1 — CALAIX DE NAVEGACIÓ
+   ============================================================ */
+const pestanya   = document.getElementById('pestanya');
+const calaix     = document.getElementById('calaix');
+const fonsCalaix = document.getElementById('fonsCalaix');
+const tancarCalaix = document.getElementById('tancarCalaix');
+
+const obrirCalaix  = () => { calaix.classList.add('obert'); fonsCalaix.classList.add('obert'); };
+const tancarElCalaix = () => { calaix.classList.remove('obert'); fonsCalaix.classList.remove('obert'); };
+
+pestanya.addEventListener('click', obrirCalaix);
+tancarCalaix.addEventListener('click', tancarElCalaix);
+fonsCalaix.addEventListener('click', tancarElCalaix);
+calaix.querySelectorAll('a').forEach(a => a.addEventListener('click', tancarElCalaix));
+
+/* ============================================================
+   BLOC 2 — RASTRE DE TINTA (només PC amb ratolí)
+   Cada cert temps, si el ratolí s'ha mogut, deixa una "gota"
+   que s'esvaeix sola (l'anima el @keyframes esvaeix del CSS)
+   ============================================================ */
+const teRatoli = window.matchMedia('(pointer: fine)').matches;
+const menysMoviment = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if (teRatoli && !menysMoviment) {
+    let ultimaGota = 0;
+    document.addEventListener('mousemove', (e) => {
+        const ara = Date.now();
+        if (ara - ultimaGota < 40) return; // limita la freqüència — no cal una gota per cada píxel
+        ultimaGota = ara;
+
+        const gota = document.createElement('div');
+        gota.className = 'gota';
+        gota.style.left = e.clientX + 'px';
+        gota.style.top  = e.clientY + 'px';
+        document.body.appendChild(gota);
+
+        // Neteja la gota del DOM quan acaba l'animació — evita acumular elements
+        gota.addEventListener('animationend', () => gota.remove());
+    });
+}
+</script>
+
+</body>
+</html>

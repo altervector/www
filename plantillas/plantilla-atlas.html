@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ATLAS — Plantilla ganxo AlterVector</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,500;1,9..144,600;0,9..144,400&family=Work+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* ============================================================
+   1. VARIABLES — paleta fosca, editorial
+   ============================================================ */
+:root{
+    --bg:        #121212;
+    --surface:   #1B1B1B;
+    --ink:       #F2EDE4;
+    --ink-soft:  #B8B2A6;
+    --accent:    #E8B34A;   /* or càlid */
+    --accent-2:  #6E8CFF;   /* periwinkle */
+    --line:      #2E2E2E;
+
+    --font-display: 'Fraunces', serif;
+    --font-cos:     'Work Sans', sans-serif;
+    --font-mono:    'Space Mono', monospace;
+
+    --radi: 22px;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-cos);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+img{ max-width:100%; display:block; }
+a{ color:inherit; text-decoration:none; }
+
+.eyebrow{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent-2);
+    margin-bottom: 16px;
+}
+
+/* ============================================================
+   2. DOCK DE NAVEGACIÓ — flotant a baix, mateix a mòbil i PC
+   Substitueix el navbar de dalt clàssic i el menú full-screen.
+   ============================================================ */
+.dock{
+    position: fixed;
+    left: 50%;
+    bottom: 18px;
+    transform: translateX(-50%);
+    z-index: 300;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(27,27,27,0.85);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 8px;
+}
+.dock a{
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    padding: 10px 14px;
+    border-radius: 999px;
+    transition: color 0.2s ease, background 0.2s ease;
+    white-space: nowrap;
+}
+.dock a:hover, .dock a.actiu{
+    color: var(--bg);
+    background: var(--accent);
+}
+.dock .separador{
+    width: 1px; height: 18px;
+    background: var(--line);
+    margin: 0 2px;
+}
+.logo-flotant{
+    position: fixed;
+    top: 24px; left: 24px;
+    z-index: 300;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 20px;
+}
+.logo-flotant span{ color: var(--accent); }
+
+/* ============================================================
+   3. HERO — titular serif itàlic + cursor glow
+   ============================================================ */
+.hero{
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    padding: 120px 24px 140px;
+    overflow: hidden;
+}
+
+/* Taca de llum que segueix el ratolí — es mou via JS (custom properties) */
+.glow{
+    position: absolute;
+    top: var(--gy, 40%);
+    left: var(--gx, 60%);
+    width: 520px; height: 520px;
+    transform: translate(-50%,-50%);
+    background: radial-gradient(circle, rgba(232,179,74,0.20) 0%, rgba(110,140,255,0.10) 45%, transparent 70%);
+    filter: blur(10px);
+    pointer-events: none;
+    z-index: 0;
+    transition: top 0.4s ease-out, left 0.4s ease-out;
+}
+
+.hero-contingut{
+    position: relative;
+    z-index: 1;
+    max-width: 760px;
+}
+
+.hero h1{
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(2.6rem, 9vw, 5.2rem);
+    line-height: 1.05;
+    margin-bottom: 26px;
+}
+.hero h1 span{ color: var(--accent-2); }
+
+.hero p{
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+    max-width: 460px;
+    margin-bottom: 36px;
+}
+
+.hero-accions{ display:flex; flex-wrap:wrap; gap:18px; align-items:center; }
+
+.boto-principal{
+    background: var(--accent);
+    color: #1a1305;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 15px 28px;
+    border-radius: 999px;
+    display: inline-block;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+.boto-principal:hover{ background: var(--accent-2); color: var(--bg); transform: translateY(-2px); }
+
+.link-secundari{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--ink-soft);
+    padding-bottom: 3px;
+    color: var(--ink-soft);
+}
+
+/* ============================================================
+   4. MARQUEE ITÀLIC — franja de capacitats
+   ============================================================ */
+.marquee{
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 22px 0;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.marquee-track{ display:inline-flex; animation: desplaca 26s linear infinite; }
+.marquee span{
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.6rem;
+    padding: 0 30px;
+    color: var(--ink-soft);
+}
+.marquee span:nth-child(odd){ color: var(--accent); }
+@keyframes desplaca{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+/* ============================================================
+   5. GALERIA HORITZONTAL — drag-scroll amb scroll-snap
+   ============================================================ */
+.seccio{ padding: 90px 24px; max-width: 1180px; margin: 0 auto; }
+
+.seccio-titol{
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    max-width: 600px;
+    margin-bottom: 10px;
+}
+.seccio-sub{ color: var(--ink-soft); max-width: 480px; margin-bottom: 20px; }
+
+.galeria{
+    display: flex;
+    gap: 18px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 30px 4px 10px;
+    cursor: grab;
+    scrollbar-width: none;
+}
+.galeria::-webkit-scrollbar{ display:none; }
+.galeria.arrossegant{ cursor: grabbing; }
+
+.galeria-card{
+    scroll-snap-align: start;
+    flex: 0 0 78%;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radi);
+    padding: 30px 24px;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.galeria-card .tag{
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent-2);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.galeria-card h3{
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.5rem;
+    margin: 14px 0 10px;
+}
+.galeria-card p{ color: var(--ink-soft); font-size: 0.92rem; }
+
+@media (min-width: 720px){ .galeria-card{ flex-basis: 340px; } }
+
+/* ============================================================
+   6. MANIFEST
+   ============================================================ */
+.manifest{
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 34px;
+}
+.manifest blockquote{
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    line-height: 1.3;
+}
+.manifest blockquote span{ color: var(--accent); }
+.stats{ display:flex; gap:40px; margin-top:26px; }
+.stat-num{ font-family: var(--font-display); font-style: italic; font-size: 2rem; color: var(--accent-2); }
+.stat-label{ font-family: var(--font-mono); font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--ink-soft); }
+
+@media (min-width: 1024px){ .manifest{ grid-template-columns: 1.1fr 0.9fr; align-items:start; } }
+
+/* ============================================================
+   7. CTA
+   ============================================================ */
+.cta-bloc{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radi);
+    margin: 0 24px 120px;
+    padding: 70px 30px;
+    text-align: center;
+}
+.cta-bloc h2{
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(1.8rem, 6vw, 3rem);
+    margin-bottom: 26px;
+}
+
+/* ============================================================
+   8. FOOTER
+   ============================================================ */
+footer{ padding: 50px 24px 130px; border-top: 1px solid var(--line); }
+.footer-grid{
+    max-width: 1180px; margin:0 auto;
+    display:grid; grid-template-columns: 1fr; gap: 30px;
+}
+footer h4{ font-family: var(--font-mono); font-size:10px; letter-spacing:2px; text-transform:uppercase; color: var(--ink-soft); margin-bottom:14px; }
+footer ul{ list-style:none; display:flex; flex-direction:column; gap:8px; }
+footer a:hover{ color: var(--accent); }
+.footer-baix{
+    max-width:1180px; margin: 40px auto 0; padding-top:20px;
+    border-top: 1px solid var(--line);
+    font-family: var(--font-mono); font-size: 10px; color: var(--ink-soft);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+}
+.footer-baix a{ color: var(--accent-2); }
+
+@media (min-width: 640px){ .footer-grid{ grid-template-columns: 1.4fr 1fr 1fr; } }
+
+@media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="logo-flotant">ATLAS<span>.</span></div>
+
+<nav class="dock">
+    <a href="#inici" class="actiu">Inicio</a>
+    <div class="separador"></div>
+    <a href="#casos">Casos</a>
+    <div class="separador"></div>
+    <a href="#estudio">Estudio</a>
+    <div class="separador"></div>
+    <a href="#contacto">Contacto</a>
+</nav>
+
+<!-- ════════════════════════════════════════════════════════
+     HERO
+     ════════════════════════════════════════════════════════ -->
+<section class="hero" id="inici">
+    <div class="glow" id="glow"></div>
+    <div class="hero-contingut">
+        <p class="eyebrow">Plantilla — Atlas 2027</p>
+        <h1>Diseño con <span>peso propio</span>.</h1>
+        <p>Webs a medida para negocios que quieren dejar huella, no pasar desapercibidos entre plantillas.</p>
+        <div class="hero-accions">
+            <a href="#contacto" class="boto-principal">Empezar proyecto</a>
+            <a href="#casos" class="link-secundari">Ver casos ↓</a>
+        </div>
+    </div>
+</section>
+
+<div class="marquee">
+    <div class="marquee-track">
+        <span>Diseño web</span><span>Identidad</span><span>UX / UI</span><span>Desarrollo</span><span>Mantenimiento</span>
+        <span>Diseño web</span><span>Identidad</span><span>UX / UI</span><span>Desarrollo</span><span>Mantenimiento</span>
+    </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     GALERIA HORITZONTAL
+     ════════════════════════════════════════════════════════ -->
+<section class="seccio" id="casos">
+    <p class="eyebrow">Casos</p>
+    <h2 class="seccio-titol">Proyectos que arrancan de una hoja en blanco.</h2>
+    <p class="seccio-sub">Arrastra para ver más →</p>
+    <div class="galeria" id="galeria">
+        <div class="galeria-card">
+            <span class="tag">Restauración</span>
+            <div><h3>Carta digital</h3><p>Menú actualizable sin depender de imprimir de nuevo cada temporada.</p></div>
+        </div>
+        <div class="galeria-card">
+            <span class="tag">Servicios</span>
+            <div><h3>Asistencia 24h</h3><p>Formulario de contacto y llamada directa siempre a un toque.</p></div>
+        </div>
+        <div class="galeria-card">
+            <span class="tag">Taller</span>
+            <div><h3>Ficha técnica</h3><p>Catálogo de servicios claro, sin ruido, fácil de mantener al día.</p></div>
+        </div>
+        <div class="galeria-card">
+            <span class="tag">Estudio</span>
+            <div><h3>Identidad completa</h3><p>De cero: logotipo, paleta y web coherentes desde el primer día.</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     MANIFEST
+     ════════════════════════════════════════════════════════ -->
+<section class="seccio" id="estudio">
+    <div class="manifest">
+        <blockquote>No hacemos webs que se parezcan a todas las demás. <span>Cada proyecto tiene su propia voz.</span></blockquote>
+        <div>
+            <p style="color:var(--ink-soft)">Trabajamos con negocios que quieren algo con carácter — sin plantillas de constructor web ni diseños prefabricados.</p>
+            <div class="stats">
+                <div><div class="stat-num">100%</div><div class="stat-label">A medida</div></div>
+                <div><div class="stat-num">24h</div><div class="stat-label">Respuesta</div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     CTA
+     ════════════════════════════════════════════════════════ -->
+<section class="cta-bloc" id="contacto">
+    <h2>¿Hablamos?</h2>
+    <a href="mailto:info@altervector.com" class="boto-principal">Escríbenos</a>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     FOOTER
+     ════════════════════════════════════════════════════════ -->
+<footer>
+    <div class="footer-grid">
+        <div>
+            <div class="logo-flotant" style="position:static; margin-bottom:10px;">ATLAS<span>.</span></div>
+            <p style="color:var(--ink-soft); font-size:0.9rem; max-width:280px;">Plantilla de demostración — pensada para adaptarse a cualquier negocio local.</p>
+        </div>
+        <div>
+            <h4>Navegación</h4>
+            <ul><li><a href="#inici">Inicio</a></li><li><a href="#casos">Casos</a></li><li><a href="#estudio">Estudio</a></li></ul>
+        </div>
+        <div>
+            <h4>Contacto</h4>
+            <ul><li><a href="mailto:info@altervector.com">info@altervector.com</a></li><li><a href="#">Instagram</a></li></ul>
+        </div>
+    </div>
+    <div class="footer-baix">
+        <span>Plantilla ganxo — 2027</span>
+        <span>Powered by <a href="https://www.altervector.com" target="_blank">AlterVector</a></span>
+    </div>
+</footer>
+
+<script>
+/* ============================================================
+   BLOC 1 — GLOW QUE SEGUEIX EL RATOLÍ (només PC)
+   Actualitza les variables CSS --gx / --gy del hero
+   ============================================================ */
+const glow = document.getElementById('glow');
+const teRatoli = window.matchMedia('(pointer: fine)').matches;
+const menysMoviment = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+if (teRatoli && !menysMoviment) {
+    document.querySelector('.hero').addEventListener('mousemove', (e) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        glow.style.setProperty('--gx', (e.clientX - rect.left) + 'px');
+        glow.style.setProperty('--gy', (e.clientY - rect.top) + 'px');
+    });
+} else if (!menysMoviment) {
+    // Mòbil: pulsació ambient suau en lloc de seguir el ratolí (no n'hi ha)
+    let angle = 0;
+    setInterval(() => {
+        angle += 0.02;
+        glow.style.setProperty('--gx', (50 + Math.sin(angle) * 15) + '%');
+        glow.style.setProperty('--gy', (40 + Math.cos(angle) * 10) + '%');
+    }, 60);
+}
+
+/* ============================================================
+   BLOC 2 — GALERIA AMB DRAG-SCROLL (arrossegar amb el ratolí)
+   Al mòbil ja funciona amb el dit de forma nativa (overflow-x)
+   ============================================================ */
+const galeria = document.getElementById('galeria');
+let arrossegant = false, inici, scrollInicial;
+
+galeria.addEventListener('mousedown', (e) => {
+    arrossegant = true;
+    galeria.classList.add('arrossegant');
+    inici = e.pageX - galeria.offsetLeft;
+    scrollInicial = galeria.scrollLeft;
+});
+['mouseleave','mouseup'].forEach(ev => galeria.addEventListener(ev, () => {
+    arrossegant = false;
+    galeria.classList.remove('arrossegant');
+}));
+galeria.addEventListener('mousemove', (e) => {
+    if (!arrossegant) return;
+    e.preventDefault();
+    const x = e.pageX - galeria.offsetLeft;
+    galeria.scrollLeft = scrollInicial - (x - inici) * 1.2;
+});
+</script>
+
+</body>
+</html>

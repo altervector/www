@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOL — Plantilla ganxo AlterVector</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Manrope:wght@400;500;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+
+/* ============================================================
+   1. VARIABLES — blanc + blocs de color, atrevit
+   ============================================================ */
+:root{
+    --bg:        #FFFFFF;
+    --paper:     #F6F5FF;   /* blanc amb un toc violeta, no crema */
+    --ink:       #14121F;
+    --ink-soft:  #605C72;
+    --taronja:   #FF5A1F;
+    --grape:     #6B2FEB;
+    --line:      #E7E4F5;
+
+    --font-display: 'Archivo Black', sans-serif;
+    --font-cos:     'Manrope', sans-serif;
+    --font-mono:    'JetBrains Mono', monospace;
+
+    --radi: 26px;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-cos);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+img{ max-width:100%; display:block; }
+a{ color:inherit; text-decoration:none; }
+
+.eyebrow{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--grape);
+    background: var(--paper);
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 18px;
+}
+
+/* ============================================================
+   2. NAV CÀPSULA FLOTANT — a dalt, centrada
+   ============================================================ */
+.nav-capsula{
+    position: fixed;
+    top: 16px; left: 50%;
+    transform: translateX(-50%);
+    z-index: 300;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 6px 6px 6px 18px;
+    box-shadow: 0 8px 30px rgba(20,18,31,0.08);
+}
+.nav-capsula .logo{
+    font-family: var(--font-display);
+    font-size: 14px;
+    margin-right: 10px;
+}
+.nav-capsula .logo span{ color: var(--taronja); }
+.nav-links{ display:none; }
+.nav-capsula .boto-mini{
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: var(--ink);
+    color: var(--bg);
+    padding: 10px 16px;
+    border-radius: 999px;
+}
+.btn-dot{
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+    background: none;
+    cursor: pointer;
+    margin-right: 6px;
+    display: flex; align-items:center; justify-content:center;
+}
+.btn-dot span{ display:block; width:4px; height:4px; border-radius:50%; background:var(--ink); box-shadow: 6px 0 var(--ink), -6px 0 var(--ink); }
+
+.dropdown{
+    position: fixed;
+    top: 68px; left: 50%;
+    transform: translateX(-50%) scale(0.9);
+    z-index: 299;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 10px;
+    box-shadow: 0 20px 50px rgba(20,18,31,0.15);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.dropdown.obert{ opacity:1; transform: translateX(-50%) scale(1); pointer-events:auto; }
+.dropdown a{
+    display:block;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 12px 20px;
+    border-radius: 12px;
+}
+.dropdown a:hover{ background: var(--paper); color: var(--grape); }
+
+@media (min-width: 860px){
+    .nav-links{ display:flex; gap: 4px; }
+    .nav-links a{
+        font-family: var(--font-mono);
+        font-size: 12px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        padding: 10px 14px;
+        border-radius: 999px;
+        color: var(--ink-soft);
+    }
+    .nav-links a:hover{ background: var(--paper); color: var(--grape); }
+    .btn-dot{ display:none; }
+    .dropdown{ display:none; }
+}
+
+/* ============================================================
+   3. HERO — titular bloc + forma de color
+   ============================================================ */
+.hero{
+    position: relative;
+    padding: 130px 20px 80px;
+    overflow: hidden;
+}
+.forma-hero{
+    position: absolute;
+    top: -80px; right: -120px;
+    width: 420px; height: 420px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--taronja), var(--grape));
+    opacity: 0.9;
+    z-index: 0;
+    filter: blur(2px);
+}
+.hero-contingut{ position:relative; z-index:1; max-width: 760px; }
+
+.hero h1{
+    font-family: var(--font-display);
+    font-size: clamp(2.4rem, 10vw, 5.4rem);
+    line-height: 0.98;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+}
+.hero h1 .marcat{
+    background: var(--taronja);
+    color: var(--bg);
+    padding: 0 10px;
+    display: inline-block;
+}
+
+.hero p{ color: var(--ink-soft); max-width: 460px; margin-bottom: 34px; font-size: 1.05rem; }
+
+.hero-accions{ display:flex; flex-wrap:wrap; gap:16px; align-items:center; }
+
+.boto-principal{
+    background: var(--ink);
+    color: var(--bg);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 16px 30px;
+    border-radius: 999px;
+    display: inline-block;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+.boto-principal:hover{ background: var(--grape); transform: translateY(-2px); }
+
+.link-secundari{
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-bottom: 2px solid var(--taronja);
+    padding-bottom: 3px;
+}
+
+/* ============================================================
+   4. MARQUEE BLOC
+   ============================================================ */
+.marquee{
+    background: var(--ink);
+    color: var(--bg);
+    padding: 20px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    transform: rotate(-1deg);
+    margin: 20px 0;
+}
+.marquee-track{ display:inline-flex; animation: desplaca 20s linear infinite; }
+.marquee span{
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    padding: 0 26px;
+}
+.marquee span:nth-child(3n){ color: var(--taronja); }
+@keyframes desplaca{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+
+/* ============================================================
+   5. SERVEIS — targetes SPOTLIGHT (revelen color al passar el cursor)
+   ============================================================ */
+.seccio{ padding: 90px 20px; max-width: 1180px; margin:0 auto; }
+
+.seccio-titol{
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 6vw, 2.8rem);
+    text-transform: uppercase;
+    line-height: 1.05;
+    max-width: 620px;
+    margin-bottom: 30px;
+}
+
+.grid-serveis{ display:grid; grid-template-columns: 1fr; gap: 14px; }
+
+.card-spot{
+    position: relative;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radi);
+    padding: 34px 26px;
+    overflow: hidden;
+}
+.card-spot::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background: radial-gradient(circle 180px at var(--mx,50%) var(--my,50%), rgba(255,90,31,0.25), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    pointer-events:none;
+}
+.card-spot:hover::before{ opacity:1; }
+.card-spot h3{ font-family: var(--font-display); font-size: 1.15rem; text-transform: uppercase; margin: 10px 0 10px; position:relative; }
+.card-spot p{ color: var(--ink-soft); font-size: 0.92rem; position:relative; }
+.card-spot .n{ font-family: var(--font-mono); font-size: 11px; color: var(--grape); position:relative; }
+
+@media (min-width: 640px){ .grid-serveis{ grid-template-columns: repeat(2,1fr); } }
+@media (min-width: 1024px){ .grid-serveis{ grid-template-columns: repeat(4,1fr); } }
+
+/* ============================================================
+   6. MANIFEST
+   ============================================================ */
+.manifest{ display:grid; grid-template-columns:1fr; gap:30px; }
+.manifest blockquote{
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 4.5vw, 2.1rem);
+    text-transform: uppercase;
+    line-height: 1.15;
+}
+.manifest blockquote .marcat{ background: var(--grape); color: var(--bg); padding: 0 8px; }
+.stats{ display:flex; gap:36px; margin-top:24px; }
+.stat-num{ font-family: var(--font-display); font-size: 1.8rem; color: var(--taronja); }
+.stat-label{ font-family: var(--font-mono); font-size: 10px; text-transform:uppercase; letter-spacing:1px; color: var(--ink-soft); }
+
+@media (min-width: 1024px){ .manifest{ grid-template-columns: 1.1fr 0.9fr; align-items:start; } }
+
+/* ============================================================
+   7. CTA
+   ============================================================ */
+.cta-bloc{
+    background: linear-gradient(135deg, var(--taronja), var(--grape));
+    color: var(--bg);
+    border-radius: var(--radi);
+    margin: 0 20px 100px;
+    padding: 70px 30px;
+    text-align: center;
+}
+.cta-bloc h2{ font-family: var(--font-display); font-size: clamp(1.8rem, 6vw, 3rem); text-transform:uppercase; margin-bottom: 24px; }
+.cta-bloc .boto-principal{ background: var(--bg); color: var(--ink); }
+.cta-bloc .boto-principal:hover{ background: var(--ink); color: var(--bg); }
+
+/* ============================================================
+   8. BOTÓ MAGNÈTIC — flotant, s'atreu cap al cursor
+   ============================================================ */
+.boto-magnetic{
+    position: fixed;
+    right: 22px; bottom: 22px;
+    z-index: 250;
+    width: 74px; height: 74px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--bg);
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    display: flex; align-items:center; justify-content:center;
+    text-align: center;
+    transition: transform 0.15s ease-out, background 0.2s ease;
+}
+.boto-magnetic:hover{ background: var(--taronja); }
+
+/* ============================================================
+   9. FOOTER
+   ============================================================ */
+footer{ background: var(--ink); color: rgba(255,255,255,0.7); padding: 60px 20px 40px; }
+.footer-grid{ max-width:1180px; margin:0 auto; display:grid; grid-template-columns:1fr; gap:34px; }
+footer h4{ font-family: var(--font-mono); font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--bg); margin-bottom:14px; }
+footer ul{ list-style:none; display:flex; flex-direction:column; gap:8px; }
+footer a:hover{ color: var(--taronja); }
+.footer-baix{
+    max-width:1180px; margin:40px auto 0; padding-top:20px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    font-family: var(--font-mono); font-size:10px; color: rgba(255,255,255,0.4);
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+}
+.footer-baix a{ color: var(--taronja); }
+
+@media (min-width: 640px){ .footer-grid{ grid-template-columns: 1.4fr 1fr 1fr; } }
+
+@media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════
+     NAV CÀPSULA FLOTANT
+     ════════════════════════════════════════════════════════ -->
+<nav class="nav-capsula">
+    <div class="logo">SOL<span>.</span></div>
+    <div class="nav-links">
+        <a href="#inici">Inicio</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#estudio">Estudio</a>
+    </div>
+    <button class="btn-dot" id="btnDot"><span></span></button>
+    <a href="#contacto" class="boto-mini">Contacto</a>
+</nav>
+<div class="dropdown" id="dropdown">
+    <a href="#inici">Inicio</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#estudio">Estudio</a>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     HERO
+     ════════════════════════════════════════════════════════ -->
+<section class="hero" id="inici">
+    <div class="forma-hero"></div>
+    <div class="hero-contingut">
+        <p class="eyebrow">Plantilla — Sol 2027</p>
+        <h1>Diseño que <span class="marcat">no pasa</span> desapercibido</h1>
+        <p>Webs a medida, con carácter propio. Sin plantillas genéricas ni relleno.</p>
+        <div class="hero-accions">
+            <a href="#contacto" class="boto-principal">Empezar proyecto</a>
+            <a href="#servicios" class="link-secundari">Ver servicios ↓</a>
+        </div>
+    </div>
+</section>
+
+<div class="marquee">
+    <div class="marquee-track">
+        <span>Diseño web</span><span>Identidad</span><span>UX / UI</span><span>Desarrollo</span><span>Mantenimiento</span>
+        <span>Diseño web</span><span>Identidad</span><span>UX / UI</span><span>Desarrollo</span><span>Mantenimiento</span>
+    </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════
+     SERVEIS — targetes spotlight
+     ════════════════════════════════════════════════════════ -->
+<section class="seccio" id="servicios">
+    <h2 class="seccio-titol">Lo que hacemos</h2>
+    <div class="grid-serveis">
+        <div class="card-spot"><span class="n">01</span><h3>Diseño web</h3><p>A medida, desde cero, pensado para tu negocio.</p></div>
+        <div class="card-spot"><span class="n">02</span><h3>Identidad</h3><p>Logotipo y paleta coherentes en todos tus canales.</p></div>
+        <div class="card-spot"><span class="n">03</span><h3>Desarrollo</h3><p>Código ligero y rápido, sin plugins de más.</p></div>
+        <div class="card-spot"><span class="n">04</span><h3>Mantenimiento</h3><p>Soporte y actualizaciones una vez la web está viva.</p></div>
+    </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     MANIFEST
+     ════════════════════════════════════════════════════════ -->
+<section class="seccio" id="estudio">
+    <div class="manifest">
+        <blockquote>No creemos en <span class="marcat">plantillas genéricas</span>. Cada proyecto empieza de cero.</blockquote>
+        <div>
+            <p style="color:var(--ink-soft)">Trabajamos con negocios locales que quieren una web que se note de verdad — sin depender de constructores genéricos.</p>
+            <div class="stats">
+                <div><div class="stat-num">100%</div><div class="stat-label">A medida</div></div>
+                <div><div class="stat-num">24h</div><div class="stat-label">Respuesta</div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════
+     CTA
+     ════════════════════════════════════════════════════════ -->
+<section class="cta-bloc" id="contacto">
+    <h2>¿Hablamos?</h2>
+    <a href="mailto:info@altervector.com" class="boto-principal">Escríbenos</a>
+</section>
+
+<button class="boto-magnetic" id="botoMagnetic">Hablemos</button>
+
+<!-- ════════════════════════════════════════════════════════
+     FOOTER
+     ════════════════════════════════════════════════════════ -->
+<footer>
+    <div class="footer-grid">
+        <div>
+            <div class="logo" style="color:var(--bg); margin-bottom:10px;">SOL<span style="color:var(--taronja)">.</span></div>
+            <p style="font-size:0.9rem; max-width:280px;">Plantilla de demostración — pensada para adaptarse a cualquier negocio local.</p>
+        </div>
+        <div>
+            <h4>Navegación</h4>
+            <ul><li><a href="#inici">Inicio</a></li><li><a href="#servicios">Servicios</a></li><li><a href="#estudio">Estudio</a></li></ul>
+        </div>
+        <div>
+            <h4>Contacto</h4>
+            <ul><li><a href="mailto:info@altervector.com">info@altervector.com</a></li><li><a href="#">Instagram</a></li></ul>
+        </div>
+    </div>
+    <div class="footer-baix">
+        <span>Plantilla ganxo — 2027</span>
+        <span>Powered by <a href="https://www.altervector.com" target="_blank">AlterVector</a></span>
+    </div>
+</footer>
+
+<script>
+/* ============================================================
+   BLOC 1 — DROPDOWN MÒBIL (càpsula)
+   ============================================================ */
+const btnDot   = document.getElementById('btnDot');
+const dropdown = document.getElementById('dropdown');
+btnDot.addEventListener('click', () => dropdown.classList.toggle('obert'));
+dropdown.querySelectorAll('a').forEach(a => a.addEventListener('click', () => dropdown.classList.remove('obert')));
+
+/* ============================================================
+   BLOC 2 — TARGETES SPOTLIGHT (només PC amb ratolí)
+   Actualitza --mx / --my de cada targeta segons el cursor
+   ============================================================ */
+const teRatoli = window.matchMedia('(pointer: fine)').matches;
+if (teRatoli) {
+    document.querySelectorAll('.card-spot').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            card.style.setProperty('--mx', (e.clientX - rect.left) + 'px');
+            card.style.setProperty('--my', (e.clientY - rect.top) + 'px');
+        });
+    });
+}
+
+/* ============================================================
+   BLOC 3 — BOTÓ MAGNÈTIC (només PC amb ratolí)
+   Si el cursor és a prop, el botó "s'hi atreu" una mica
+   ============================================================ */
+const botoMagnetic = document.getElementById('botoMagnetic');
+if (teRatoli) {
+    document.addEventListener('mousemove', (e) => {
+        const rect = botoMagnetic.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const dx = e.clientX - cx;
+        const dy = e.clientY - cy;
+        const distancia = Math.sqrt(dx * dx + dy * dy);
+
+        if (distancia < 140) {
+            const forca = (1 - distancia / 140) * 0.35;
+            botoMagnetic.style.transform = `translate(${dx * forca}px, ${dy * forca}px)`;
+        } else {
+            botoMagnetic.style.transform = 'translate(0,0)';
+        }
+    });
+}
+</script>
+
+</body>
+</html>
