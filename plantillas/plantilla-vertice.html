@@ -189,8 +189,7 @@ a{ color:inherit; text-decoration:none; }
         display: flex;
         flex-direction: column;
         gap: 34px;
-        writing-mode: vertical-rl;
-        transform: rotate(180deg);
+
     }
 
     .sidebar nav a{
@@ -200,7 +199,10 @@ a{ color:inherit; text-decoration:none; }
         text-transform: uppercase;
         color: rgba(238,236,246,0.55);
         transition: color 0.2s ease;
-    }
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+     }
+     
     .sidebar nav a:hover{ color: var(--bg); }
     .sidebar nav a.actiu{ color: var(--accent-2); }
 
