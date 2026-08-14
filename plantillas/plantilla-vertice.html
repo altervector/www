@@ -758,8 +758,9 @@ if (teRatoli && !menysMoviment) {
     let frameSolicitat = false;
     let ratoliX = 0, ratoliY = 0;
 
-    dotGrid.addEventListener('mousemove', (e) => {
-        ratoliX = e.clientX;
+// Escoltem al .hero, no al dotGrid — el dotGrid té pointer-events:none
+    // (per no bloquejar els clics del hero) i per això mai rebia l'event
+    document.querySelector('.hero').addEventListener('mousemove', (e) => {        ratoliX = e.clientX;
         ratoliY = e.clientY;
         if (!frameSolicitat) {
             frameSolicitat = true;
