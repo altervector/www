@@ -467,6 +467,7 @@ let arrossegant = false, xInici, scrollInicial;
 galeria.addEventListener('mousedown', (e) => {
     arrossegant = true;
     galeria.classList.add('arrossegant');
+     galeria.style.scrollSnapType = 'none';   // ⟵ afegeix aquesta línia — desactiva el snap mentre arrossegues
     xInici = e.clientX;              // posició real del ratolí en aquest instant
     scrollInicial = galeria.scrollLeft;
     e.preventDefault();              // ⟵ atura la selecció de text des d'aquí, no al mousemove
@@ -475,6 +476,7 @@ galeria.addEventListener('mousedown', (e) => {
 window.addEventListener('mouseup', () => {
     arrossegant = false;
     galeria.classList.remove('arrossegant');
+    galeria.style.scrollSnapType = '';       // ⟵ afegeix aquesta línia — el torna a activar en soltar
 });
 
 window.addEventListener('mousemove', (e) => {
