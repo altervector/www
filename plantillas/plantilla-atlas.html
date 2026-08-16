@@ -220,6 +220,8 @@ a{ color:inherit; text-decoration:none; }
     padding: 30px 4px 10px;
     cursor: grab;
     scrollbar-width: none;
+        user-select: none;        /* ⟵ afegeix aquesta línia */
+        -webkit-user-select: none; /* ⟵ i aquesta */
 }
 .galeria::-webkit-scrollbar{ display:none; }
 .galeria.arrossegant{ cursor: grabbing; }
@@ -460,23 +462,25 @@ if (teRatoli && !menysMoviment) {
    Al mòbil ja funciona amb el dit de forma nativa (overflow-x)
    ============================================================ */
 const galeria = document.getElementById('galeria');
-let arrossegant = false, inici, scrollInicial;
+let arrossegant = false, xInici, scrollInicial;
 
 galeria.addEventListener('mousedown', (e) => {
     arrossegant = true;
     galeria.classList.add('arrossegant');
-    inici = e.pageX - galeria.offsetLeft;
+    xInici = e.clientX;              // posició real del ratolí en aquest instant
     scrollInicial = galeria.scrollLeft;
+    e.preventDefault();              // ⟵ atura la selecció de text des d'aquí, no al mousemove
 });
-['mouseleave','mouseup'].forEach(ev => galeria.addEventListener(ev, () => {
+
+window.addEventListener('mouseup', () => {
     arrossegant = false;
     galeria.classList.remove('arrossegant');
-}));
-galeria.addEventListener('mousemove', (e) => {
+});
+
+window.addEventListener('mousemove', (e) => {
     if (!arrossegant) return;
-    e.preventDefault();
-    const x = e.pageX - galeria.offsetLeft;
-    galeria.scrollLeft = scrollInicial - (x - inici) * 1.2;
+    const diferencia = e.clientX - xInici;   // quant s'ha mogut el ratolí des de l'inici
+    galeria.scrollLeft = scrollInicial - diferencia;
 });
 </script>
 
