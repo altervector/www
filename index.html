@@ -34,6 +34,7 @@
 
         /* ─── VARIABLES ──────────────────────────────────────── */
         :root {
+            --negre:       #090909;
             --blau:        #1a3fff;
             --cian:        #00cfff;
             --blau-fosc:   #0d1f7a;
@@ -42,7 +43,14 @@
             --fons-clar:   #f5f8ff;
             --fons-blanc:  #ffffff;
             --border:      rgba(0, 150, 255, 0.15);
+            --red:         #FF0000;
             --font-agora:   ;
+
+            --fonsmarquee: #1B2357;
+            --line:        #8F692C;
+            --font-display:    'Fraunces', serif;
+            --ink-soft:    #98A6FF;
+            --accent:      #C07B13;
         }
 
         html { scroll-behavior: smooth; }
@@ -146,6 +154,29 @@
         }
         .hero-boto:hover { opacity: 0.85; transform: translateY(-2px); }
 
+/* ============================================================
+   4. MARQUEE ITÀLIC — franja de capacitats
+   ============================================================ */
+.marquee{
+        margin: -35px 0;
+        background: var(--fonsmarquee);
+    /*border-top: 1px solid var(--red);*/
+    /*border-bottom: 1px solid var(--red);*/
+    padding: 22px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    transform: rotate(-2deg);
+}
+.marquee-track{ display:inline-flex; animation: desplaca 24s linear infinite; }
+.marquee span{
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.6rem;
+    padding: 0 30px;
+    color: var(--ink-soft);
+}
+.marquee span:nth-child(odd){ color: var(--accent); }
+@keyframes desplaca{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
 
         /* ════════════════════════════════════════════════════
            SECCIONS GENERALS
@@ -368,7 +399,14 @@
             <a href="#portfolio" class="hero-boto">Veure projectes</a>
         </div>
     </section>
-
+<div class="marquee">
+    <div class="marquee-track">
+        <span>Disseny web</span><span>Identitat</span><span>UX / UI</span><span>Desenvolupament</span><span>Manteniment</span>
+        <span>Disseny web</span><span>Identitat</span><span>UX / UI</span><span>Desenvolupament</span><span>Manteniment</span>
+         <span>Disseny web</span><span>Identitat</span><span>UX / UI</span><span>Desenvolupament</span><span>Manteniment</span>
+        <span>Disseny web</span><span>Identitat</span><span>UX / UI</span><span>Desenvolupament</span><span>Manteniment</span>
+   </div>
+</div>
 
     <!-- QUÈ ÉS ALTERVECTOR -->
     <section class="seccio seccio-que" id="que-es">
