@@ -1,0 +1,339 @@
+/* ============================================================
+   ESTILS.CSS - AlterWeb Studio (pàgina principal)
+   ============================================================ */
+
+@font-face {
+    font-family: 'Comfortaa';
+    src: url('https://avsets.pages.dev/fonts/Comfortaa-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+/* ─── 1. RESET ─────────────────────────────────────────────── */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* ─── 2. VARIABLES ─────────────────────────────────────────── */
+:root {
+    --negre:       #090909;
+    --blau:        #1a3fff;
+    --cian:        #00cfff;
+    --blau-fosc:   #0d1f7a;
+    --text-fosc:   #1a2340;
+    --text-suau:   #4a5a7a;
+    --fons-clar:   #f5f8ff;
+    --fons-blanc:  #ffffff;
+    --border:      rgba(0, 150, 255, 0.15);
+    --red:         #FF0000;
+    --font-agora:  ;
+
+    --fonsmarquee: #1D275D;
+    --line:        #8F692C;
+    --line2:       #A47832;
+    --font-display: 'Fraunces', serif;
+    --ink-soft:    #98A6FF;
+    --accent:      #C07B13;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Segoe UI', Roboto, sans-serif;
+    color: var(--text-fosc);
+    background: var(--fons-blanc);
+}
+
+a { text-decoration: none; color: inherit; }
+a:hover { text-decoration: none; }
+
+/* ─── 3. HERO ──────────────────────────────────────────────── */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 500px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://avsets.pages.dev/images/altervector/background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    animation: deriva 20s ease-in-out infinite alternate;
+}
+
+@keyframes deriva {
+    0%   { transform: scale(1)    translateX(0px); }
+    50%  { transform: scale(1.04) translateX(12px); }
+    100% { transform: scale(1.02) translateX(-8px); }
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        160deg,
+        rgba(5, 10, 40, 0.55) 0%,
+        rgba(10, 20, 80, 0.40) 50%,
+        rgba(0, 10, 50, 0.60) 100%
+    );
+}
+
+.hero-contingut {
+    position: relative;
+    z-index: 10;
+    padding: 20px;
+}
+
+.hero-logo {
+    height: 220px;
+    width: auto;
+    margin: 0 auto 24px auto;
+    filter: drop-shadow(0 4px 20px rgba(0, 180, 255, 0.4));
+}
+
+.hero-titol {
+    font-size: 1rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.75);
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+}
+
+.hero-slogan {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.3;
+    margin-bottom: 36px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-boto {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--cian), var(--blau));
+    color: #ffffff;
+    padding: 14px 36px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: opacity 0.2s, transform 0.2s;
+}
+.hero-boto:hover { opacity: 0.85; transform: translateY(-2px); }
+
+/* ─── 4. MARQUEE ITÀLIC — franja de capacitats ───────────── */
+.marquee {
+    margin: -35px 0;
+    background: var(--fonsmarquee);
+    border-top: 3px solid var(--negre);
+    border-bottom: 3px solid var(--negre);
+    padding: 22px 0;
+    overflow: hidden;
+    white-space: nowrap;
+    transform: rotate(-2deg);
+}
+.marquee-track { display: inline-flex; animation: desplaca 24s linear infinite; }
+.marquee span {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.6rem;
+    padding: 0 30px;
+    color: var(--ink-soft);
+}
+.marquee span:nth-child(odd) { color: var(--accent); }
+@keyframes desplaca { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ─── 5. SECCIONS GENERALS ─────────────────────────────────── */
+.seccio { padding: 70px 24px; }
+
+.seccio-inner {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.seccio-titol {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--blau-fosc);
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+}
+
+.font-agora { font-family: 'Comfortaa', sans-serif; }
+
+.seccio-titol span {
+    background: linear-gradient(135deg, var(--cian), var(--blau));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.seccio-subtitol {
+    font-size: 1rem;
+    color: var(--text-suau);
+    line-height: 1.7;
+    max-width: 640px;
+    margin-bottom: 48px;
+}
+
+.separador {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 0;
+}
+
+/* ─── 6. QUÈ ÉS ────────────────────────────────────────────── */
+.seccio-que { background: var(--fons-clar); }
+
+.que-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+}
+
+.que-item {
+    background: var(--fons-blanc);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 28px 24px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.que-icona { font-size: 1.8rem; flex-shrink: 0; line-height: 1; }
+
+.que-item h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--blau-fosc);
+    margin-bottom: 6px;
+}
+
+.que-item p {
+    font-size: 0.9rem;
+    color: var(--text-suau);
+    line-height: 1.6;
+}
+
+/* ─── 7. PORTFOLIO ─────────────────────────────────────────── */
+.seccio-portfolio { background: var(--fons-blanc); }
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+}
+
+.portfolio-card {
+    display: block;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.portfolio-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 80, 255, 0.12);
+}
+
+.portfolio-card-imatge {
+    width: 100%;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.portfolio-card-imatge img {
+    max-height: 120px;
+    max-width: 90%;
+    width: auto;
+    height: auto;
+}
+
+.portfolio-card-text { padding: 20px 22px; }
+
+.portfolio-card-text h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--blau-fosc);
+    margin-bottom: 6px;
+}
+
+.portfolio-card-text p {
+    font-size: 0.875rem;
+    color: var(--text-suau);
+    line-height: 1.6;
+}
+
+.portfolio-card-tag {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--cian);
+    border: 1px solid var(--cian);
+    padding: 3px 10px;
+    border-radius: 3px;
+}
+
+/* ─── 8. CONTACTE ──────────────────────────────────────────── */
+.seccio-contacte {
+    background: var(--fons-clar);
+    text-align: center;
+}
+
+.contacte-boto {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--cian), var(--blau));
+    color: #ffffff;
+    padding: 16px 44px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: opacity 0.2s, transform 0.2s;
+    margin-top: 8px;
+}
+.contacte-boto:hover { opacity: 0.85; transform: translateY(-2px); }
+
+/* ─── 9. FOOTER ────────────────────────────────────────────── */
+.footer {
+    background: var(--blau-fosc);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 28px 20px;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+.footer a { color: var(--cian); }
+
+/* ── RESPONSIVE ── */
+@media (min-width: 600px) {
+    .que-grid       { grid-template-columns: 1fr 1fr; }
+    .portfolio-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (min-width: 900px) {
+    .que-grid       { grid-template-columns: 1fr 1fr 1fr 1fr; }
+    .portfolio-grid { grid-template-columns: 1fr 1fr 1fr; }
+    .hero-slogan    { font-size: 2.4rem; }
+    .hero-logo      { height: 220px; }
+}
