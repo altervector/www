@@ -3,7 +3,7 @@
    Web Component: <footer></footer>
    ============================================================ */
 
-class Footer extends HTMLElement {
+class FooterComu extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
  
@@ -40,4 +40,4 @@ class Footer extends HTMLElement {
         `;
     }
 }
-customElements.define('footer', Footer);
+customElements.define('footer-comu', FooterComu);
