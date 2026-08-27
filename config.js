@@ -84,13 +84,13 @@ const CONFIG = {
         },
         {
             id:          "cadialimentacio",
-            titol:       "Cadí Alimentació",
+            titol:       "Carles | Cadí Alimentació",
             subtitol:    "Distribució de congelats",
-            desc:        "Catàleg digital per negoci de distribució de productes congelats.",
+            desc:        "Carta de Presentació | Portfolio | Tarja de Visites digital.",
             fons:        "#FFFFFF",
-            logo:        "https://avsets.pages.dev/logo/PortfolioCA.png",
+            logo:        "https://avsets.pages.dev/logo/PortfolioCCA.png",
             titolClasse: "",
-            link:        "https://cadialimentacio.alterwebstudio.com/",
+            link:        "https://carlescadi.alterwebstudio.com/",
         },
     ],
 
