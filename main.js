@@ -65,6 +65,15 @@
                     </div>
                 </div>
             `).join('');
+            const queItemsExtra = CONFIG.QUE_ITEMS_EXTRA.map(item => `
+                <div class="que-item que-item-extra">
+                    <div class="que-icona">${item.icona}</div>
+                    <div>
+                        <h3>${item.titol}</h3>
+                        <p>${item.desc}</p>
+                    </div>
+                </div>
+            `).join('');            
 
             // ─── Portfolio ───────────────────────────────────────
             const portfoliCards = CONFIG.PROJECTES.map(p => `
@@ -105,6 +114,9 @@
                         <p class="seccio-subtitol">${CONFIG.QUE_SUBTITOL}</p>
                         <div class="que-grid">
                             ${queItems}
+                        </div>
+                        <div class="que-grid que-grid-extra">
+                            ${queItemsExtra}
                         </div>
                     </div>
                 </section>

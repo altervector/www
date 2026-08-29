@@ -29,11 +29,16 @@ const CONFIG = {
     QUE_TITOL_ACCENT: "AlterWeb Studio",
     QUE_SUBTITOL:     "Creem webs professionals per a petits negocis i autònoms que volen ser presents a internet sense complicacions. Ràpides, clares i gestionables de forma autònoma.",
 
-    QUE_ITEMS: [
-        { icona: "🌐", titol: "Presència digital",      desc: "Una web professional, accessible des de qualsevol dispositiu, que representa el teu negoci les 24h." },
-        { icona: "📋", titol: "Contingut dinàmic",      desc: "Cartes, catàlegs, serveis o productes. El contingut s'actualitza en temps real sense tocar codi." },
-        { icona: "⚙️", titol: "Gestió autònoma",        desc: "Panel d'administració inclòs. Tu mateix pots afegir, modificar o eliminar contingut quan vulguis." },
-        { icona: "📱", titol: "Optimitzada per mòbil",  desc: "Dissenyada primer per a mòbil. Els teus clients la veuran perfecta des de qualsevol pantalla." },
+     QUE_ITEMS: [
+        { icona: "🌐", titol: "Presència digital",  desc: "Una web pròpia que et representa a internet, sense dependre només de les xarxes socials." },
+        { icona: "📋", titol: "Contingut dinàmic",  desc: "Cartes, catàlegs, serveis o productes. El contingut s'actualitza en temps real, sense coneixements tècnics." },
+        { icona: "⚙️", titol: "Gestió autònoma",    desc: "Panell inclòs perquè tu mateix puguis actualitzar els teus productes, preus o serveis quan vulguis." },
+        { icona: "📱", titol: "Responsive",         desc: "Pensada per a totes les pantalles, començant pel mòbil. Ràpida de carregar, perquè els teus clients no marxin abans de veure-la." },
+    ],
+
+    QUE_ITEMS_EXTRA: [
+        { icona: "🔍", titol: "Pensada per a cercadors",       desc: "Estructurada perquè Google i altres cercadors trobin el teu negoci, i present a Google Maps si tens un local físic." },
+        { icona: "🔄", titol: "Renovació sense complicacions", desc: "Tens una web antiga o que va lenta? La renovem de cap a peus, mantenint la teva adreça web de sempre perquè els teus clients no notin cap canvi." },
     ],
 
     // 2.6 SECCIÓ PORTFOLI

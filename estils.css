@@ -249,6 +249,10 @@ a:hover { text-decoration: none; }
     grid-template-columns: 1fr;
     gap: 24px;
 }
+.que-grid-extra {
+    margin-top: 24px;
+}
+
 
 .que-item {
     background: var(--fons-blanc);
@@ -258,6 +262,10 @@ a:hover { text-decoration: none; }
     display: flex;
     gap: 20px;
     align-items: flex-start;
+}
+.que-item-extra {
+    background: var(--fons-blanc);
+    border-color: var(--cian);
 }
 
 .que-icona { font-size: 1.8rem; flex-shrink: 0; line-height: 1; }
@@ -384,4 +392,5 @@ a:hover { text-decoration: none; }
     .portfolio-grid { grid-template-columns: 1fr 1fr 1fr; }
     .hero-slogan    { font-size: 2.4rem; }
     .hero-logo      { height: 220px; }
+    .que-grid-extra { grid-template-columns: 1fr 1fr; }
 }
