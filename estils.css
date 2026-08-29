@@ -253,19 +253,14 @@ a:hover { text-decoration: none; }
     margin-top: 24px;
 }
 
-
 .que-item {
     background: var(--fons-blanc);
-    border: 1px solid var(--border);
+    border: 1px solid var(--cian);
     border-radius: 8px;
     padding: 28px 24px;
     display: flex;
     gap: 20px;
     align-items: flex-start;
-}
-.que-item-extra {
-    background: var(--fons-blanc);
-    border-color: var(--cian);
 }
 
 .que-icona { font-size: 1.8rem; flex-shrink: 0; line-height: 1; }
