@@ -23,8 +23,7 @@ const CONFIG = {
     HERO_BOTO:      "Veure projectes",
 
     // 2.4 MARQUEE
-    MARQUEE_ITEMS: ["Disseny web", "Identitat", "UX / UI", "Desenvolupament", "Manteniment"],
-
+    MARQUEE_ITEMS: ["Disseny web", "Desenvolupament", "Panells d'administració", "SEO", "Manteniment"],
     // 2.5 SECCIÓ "QUÈ ÉS"
     QUE_TITOL_PRE:    "Què és",
     QUE_TITOL_ACCENT: "AlterWeb Studio",
