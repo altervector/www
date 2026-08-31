@@ -151,18 +151,10 @@
 
                 <!-- CONTACTE -->
                 <section class="seccio seccio-contacte" id="contacte">
+
+
+
                     <div class="seccio-inner">
-                        <h2 class="seccio-titol">${CONFIG.CONTACTE_TITOL}</h2>
-                        <p class="seccio-subtitol" style="margin: 0 auto 32px auto; text-align: center;">
-                            ${CONFIG.CONTACTE_SUBTITOL}
-                        </p>
-                        <a href="mailto:${CONFIG.EMAIL}" class="contacte-boto">${CONFIG.CONTACTE_BOTO}</a>
-                        <br>
-                        <a href="${CONFIG.WHATSAPP}" target="_blank" class="contacte-boto">${CONFIG.WHATSAPPLBL}</a>
-                    </div>
-
-
-                                        <div class="seccio-inner">
                         <h2 class="seccio-titol">${CONFIG.CONTACTE_TITOL}</h2>
                         <p class="seccio-subtitol" style="margin: 0 auto 32px auto; text-align: center;">
                             ${CONFIG.CONTACTE_SUBTITOL}
