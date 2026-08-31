@@ -157,6 +157,8 @@
                             ${CONFIG.CONTACTE_SUBTITOL}
                         </p>
                         <a href="mailto:${CONFIG.EMAIL}" class="contacte-boto">${CONFIG.CONTACTE_BOTO}</a>
+                        <br>
+                        <a href="${CONFIG.WHATSAPP}" target="_blank" class="contacte-boto">${CONFIG.WHATSAPPLBL}</a>
                     </div>
                 </section>
 

@@ -7,6 +7,7 @@ const CONFIG = {
     // 1. NEGOCI
     NOM:            "AlterWeb Studio",
     EMAIL:          "info@alterwebstudio.com",
+    WHATSAPP:       "https://wa.me/34711510676",    WHATSAPPLBL: "💬 Escríu-me per WhatsApp",
 
     // 2. RUTES
     BASE_URL:       "./",
