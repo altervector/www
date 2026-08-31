@@ -384,6 +384,13 @@ a:hover { text-decoration: none; }
     text-transform: uppercase;
 }
 .footer a { color: var(--cian); }
+.icona-app {
+    width: 32px;
+    height: auto;
+    vertical-align: middle;
+    margin-right: 6px;
+    display: inline-block;
+}
 
 /* ── RESPONSIVE ── */
 @media (min-width: 600px) {

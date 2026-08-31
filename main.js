@@ -160,6 +160,21 @@
                         <br>
                         <a href="${CONFIG.WHATSAPP}" target="_blank" class="contacte-boto">${CONFIG.WHATSAPPLBL}</a>
                     </div>
+
+
+                                        <div class="seccio-inner">
+                        <h2 class="seccio-titol">${CONFIG.CONTACTE_TITOL}</h2>
+                        <p class="seccio-subtitol" style="margin: 0 auto 32px auto; text-align: center;">
+                            ${CONFIG.CONTACTE_SUBTITOL}
+                        </p>
+                        <div style="display:flex; flex-direction:column; gap:12px; align-items:center;">
+                            <a href="mailto:${CONFIG.EMAIL}" class="contacte-boto">${CONFIG.CONTACTE_BOTO}</a>
+                            <a href="${CONFIG.WHATSAPP}" target="_blank" class="contacte-boto">${CONFIG.WHATSAPPLBL}</a>
+                            <a href="${CONFIG.INSTAGRAM}" target="_blank" class="contacte-boto">
+                                <img src="${CONFIG.ASSETS}icon/Icoinsta.png" alt="Instagram" class="icona-app"> Instagram
+                            </a>
+                        </div>
+                    </div>
                 </section>
 
             `;
