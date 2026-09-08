@@ -35,6 +35,9 @@
 }
 
 html { scroll-behavior: smooth; }
+html {
+  scroll-padding-top: 40px; /* Ajusta segons necessitis */
+}
 
 body {
     font-family: 'Segoe UI', Roboto, sans-serif;
@@ -60,7 +63,7 @@ a:hover { text-decoration: none; }
 }
 
 .navbar.scrolled {
-    background-color: rgba(9, 9, 9, 0.85);
+    background-color: rgba(9 9 9 / 0.63);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
 }

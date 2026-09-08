@@ -19,6 +19,13 @@ const CONFIG = {
     // 2.2 IMATGES
     LOGO:           "logo/logoAWStrans.png",
 
+    // 2.2.2   NAV
+    NAV_INI:        "Inici",
+    NAV_QUE:        "Qui som..",
+    NAV_PORT:        "Destacats",
+    NAV_CON:        "Contacte",
+
+
     // 2.3 HERO
     HERO_EYEBROW:   "Solucions Digitals Dinàmiques",
     HERO_TITOL:     "El teu negoci,<br>visible i al dia",

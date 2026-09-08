@@ -16,7 +16,7 @@
         const hero = document.getElementById('hero');
         if (hero) {
             hero.innerHTML = `
-                <section class="hero">
+                <section class="hero" id="inici">
                     <div class="hero-bg"></div>
                     <div class="hero-overlay"></div>
                     <div class="hero-contingut">

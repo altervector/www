@@ -15,6 +15,7 @@ class NavbarComu extends HTMLElement {
                 </div>
                 <button class="navbar-hamburguesa">☰</button>
                 <ul class="navbar-menu">
+                    <li><a href="#inici">${CONFIG.NAV_INI}</a></li>
                     <li><a href="#que-es">${CONFIG.NAV_QUE}</a></li>
                     <li><a href="#portfolio">${CONFIG.NAV_PORT}</a></li>
                     <li><a href="#contacte">${CONFIG.NAV_CON}</a></li>
