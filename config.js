@@ -94,7 +94,7 @@ const CONFIG = {
             fons:        "#FFFFFF",
             logo:        "https://avsets.pages.dev/logo/PortfolioOA.png",
             titolClasse: "",
-            link:        "https://oleyaji.alterwebstudio.com/",
+            link:        "https://recycled.alterwebstudio.com/",
         },
         {
             id:          "cadialimentacio",
