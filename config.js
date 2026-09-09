@@ -63,7 +63,7 @@ const CONFIG = {
             desc:        "Web estàtica per especialistes en manteniment, reparació i restauració de motocicletes.",
             fons:        "#FFFFFF",
             logo:        "https://avsets.pages.dev/logo/logo-nouAMR.png",
-            titolClasse: "",
+            titolClasse: "font-amr",
             link:        "https://www.amrmotorbike.com/",
         },
         {
@@ -78,7 +78,7 @@ const CONFIG = {
         },
         {
             id:          "agora",
-            titol:       "àgora Restaurant",
+            titol:       "àgora | Restaurant",
             subtitol:    "Restauració",
             desc:        "Carta digital dinàmica amb menús diaris, carta completa, vins i còctels. Panel d'administració inclòs.",
             fons:        "#FFFFFF",
@@ -88,7 +88,7 @@ const CONFIG = {
         },
         {
             id:          "oleyaji",
-            titol:       "Olé y Ají Gastronomia",
+            titol:       "El teu Nom | Gastronomia",
             subtitol:    "Restauració",
             desc:        "Web de restaurant amb galeria de plats, fotos i descripcions. Gestió de contingut amb imatges.",
             fons:        "#FFFFFF",
@@ -103,7 +103,7 @@ const CONFIG = {
             desc:        "Carta de Presentació | Portfolio | Tarja de Visites digital.",
             fons:        "#FFFFFF",
             logo:        "https://avsets.pages.dev/logo/PortfolioCCA.png",
-            titolClasse: "",
+            titolClasse: "font-agora",
             link:        "https://carlescadi.alterwebstudio.com/",
         },
     ],

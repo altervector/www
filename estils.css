@@ -8,6 +8,12 @@
     font-weight: 700;
     font-style: normal;
 }
+@font-face {
+    font-family: 'airstrikechrome';
+    src: url('https://avsets.pages.dev/fonts/airstrikechrome.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
 
 /* ─── 1. RESET ─────────────────────────────────────────────── */
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -231,6 +237,7 @@ a:hover { text-decoration: none; }
 }
 
 .font-agora { font-family: 'Comfortaa', sans-serif; }
+.font-amr   { font-family: 'airstrikechrome', sans-serif; }
 
 .seccio-titol span {
     background: linear-gradient(135deg, var(--cian), var(--blau));
