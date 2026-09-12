@@ -118,7 +118,7 @@ a:hover { text-decoration: none; }
 .hero-bg {
     position: absolute;
     inset: 0;
-    background-image: url('https://avsets.pages.dev/images/altervector/background.png');
+    background-image: url('https://avsets.pages.dev/images/altervector/bgAWS.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
